@@ -1,10 +1,20 @@
-<%= @player_1_name %> vs. <%= @player_2_name %>
-<br>
-<%= @player_2_name %>: 60HP
+<style>
+body {
+  background-color: powderblue;
+}
+</style>
 
+<h1 style = "color: purple;">
+  <%= $p1.name %> vs. <%= $p2.name %>
+<br>
+<br>
+ <%= $p1.name %>: <%= $p1.hit_points %>HP
+<br>
+<br>
+ <%= $p2.name %>: <%= $p2.hit_points %>HP
 <!-- <a href="/attack">Attack</a> -->
 <!-- #this can be used if u wish to have a link instead of a button-->
-
-<form action="/attack">
+<!-- Global variables with methods from the model layer are called on to print to screen -->
+<form action="/attack" method="post">
   <input type="submit" value="Attack">
 </form>

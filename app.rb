@@ -1,7 +1,7 @@
 require 'sinatra/base'
-
+require './lib/player'
 class Battle < Sinatra::Base
-  enable :sessions
+enable :sessions
 
   # A session is a short-term information store that lives on the server.
   # It's very small, but it allows the server to store basic pieces of information,
@@ -21,21 +21,26 @@ class Battle < Sinatra::Base
 # extract the names from the session to instance variables
 
   post '/names' do
-   session[:player_1_name] = params[:player_1_name]
-   session[:player_2_name]= params[:player_2_name]
+    $p1 = Player.new(params[:p1_name])
+    $p2 = Player.new(params[:p2_name])
+   # session[:player_1_name] = params[:player_1_name]  replaced
+   # session[:player_2_name]= params[:player_2_name]
    redirect '/play'     #So we need to redirect the user after they post to /names:
   end
 # a POST request is not intended for extracting parameters and for rendering a view of these purposes. We should use a GET request to render our view.
   get '/play' do
-  @player_1_name = session[:player_1_name]
-  @player_2_name = session[:player_2_name]
-  erb :play
-end
+  # @player_1_name = session[:player_1_name]   replaced
+  # @player_2_name = session[:player_2_name]
+   erb :play
+  end
 
- get '/attack' do
-   @player_1_name = session[:player_1_name]
-   @player_2_name = session[:player_2_name]
+  post '/attack' do
+
+   $p1.attack($p2)
+   # @player_1_name = session[:player_1_name]  replaced
+   # @player_2_name = session[:player_2_name]
    erb :attack
- end
+  end
+ # this allows programme to be run by just running the app file
   run! if app_file == $0
 end

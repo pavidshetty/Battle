@@ -5,7 +5,7 @@
 # Capybara's feature and scenario syntax. These work just like describe and it
 
 feature 'enter name' do
-  scenario 'submitting names' do
+  scenario 'Displaying names from a form' do
     sign_in_and_play
     expect(page).to have_content 'Pavi vs. Ash'
   end
